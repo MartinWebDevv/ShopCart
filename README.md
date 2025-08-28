@@ -45,7 +45,7 @@ main.jsx
 ## Getting Started
 1. Clone the repo
    ```bash
-   git clone https://github.com/YOUR_USERNAME/shop-cart.git
+   git clone https://github.com/MartinWebDevv/shop-cart.git
    cd shop-cart
 
 npm install
