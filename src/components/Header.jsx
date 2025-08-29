@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Header() {
+export default function Header(props) {
   return (
     <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
@@ -22,7 +22,7 @@ export default function Header() {
             Products
           </a>
           <button className="rounded-xl border border-slate-300 px-4 py-2 text-sm dark:border-slate-700">
-            Cart (0)
+            Cart ({props.count})
           </button>
         </nav>
       </div>

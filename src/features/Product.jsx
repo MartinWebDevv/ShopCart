@@ -1,8 +1,8 @@
 import React from "react";
 import { products } from "../data/products";
-import ProductCard from "./ProductCard";
+import ProductCard from "../components/ProductCard";
 
-export default function Product() {
+export default function Product(props) {
   return (
     <main className="mx-auto max-w-6xl px-4 py-6">
       <section>
@@ -18,6 +18,14 @@ export default function Product() {
               img={product.img}
               tags={product.tags}
               inStock={product.inStock}
+              onAdd={() =>
+                props.onAdd({
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  img: product.img,
+                })
+              }
             />
           ))}
         </div>

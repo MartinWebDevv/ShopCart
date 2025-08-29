@@ -24,6 +24,12 @@ export default function ProductCard(props) {
         <p className="mb-3 text-base font-medium"> {props.name}</p>
         <p className="mb-3 text-base font-medium">{formatPrice(props.price)}</p>
 
+        {/* 
+        This entire block is a conditional render. 
+        It only runs if:
+        1) props.tags is actually an array (Array.isArray(props.tags)), AND
+        2) that array has at least 1 element (props.tags.length > 0).
+        */}
         {Array.isArray(props.tags) && props.tags.length > 0 && (
           <div className="mb-3 flex flex-wrap gap-1">
             {props.tags.slice(0, 2).map((t) => (
@@ -41,6 +47,7 @@ export default function ProductCard(props) {
           <button
             type="button"
             disabled={!available}
+            onClick={props.onAdd}
             className={`w-full rounded-xl px-5 py-2 text-sm transition
               ${
                 available
