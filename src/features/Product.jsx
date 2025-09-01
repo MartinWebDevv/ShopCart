@@ -26,6 +26,8 @@ export default function Product(props) {
                   img: product.img,
                 })
               }
+              onOpenModel={() => 
+                props.onOpenModel(product)}
             />
           ))}
         </div>

@@ -1,11 +1,16 @@
+import geekbar from "../assets/imgs/geekbar-x.jpg";
+import skweezed from "../assets/imgs/skweezed-100.jpg";
+import aegisLegend3 from "../assets/imgs/aegis-legend-3.jpg";
+import fogger from "../assets/imgs/fogger-switch-pro.jpg";
+
 export const products = [
   {
     id: "p-001",
-    name: "Flum Mellow",
+    name: "Geek Bar X",
     category: "disposable",
     price: 2199, // cents
     inStock: true,
-    img: "/imgs/geekbar-x.jpg", // optional; you can drop images later in /public/imgs
+    img: geekbar,
     tags: ["best-seller", "new"],
   },
   {
@@ -14,7 +19,7 @@ export const products = [
     category: "juice",
     price: 1899,
     inStock: true,
-    img: "/imgs/skweezed-100.jpg",
+    img: skweezed,
     tags: ["fruit"],
   },
   {
@@ -22,8 +27,8 @@ export const products = [
     name: "Aegis Legend 3 Kit",
     category: "device",
     price: 10000,
-    inStock: false,
-    img: "/imgs/aegis-legend-3.jpg",
+    inStock: true,
+    img: aegisLegend3,
     tags: ["kit"],
   },
   {
@@ -32,7 +37,7 @@ export const products = [
     category: "disposable",
     price: 2199,
     inStock: true,
-    img: "/imgs/fogger-switch-pro.jpg",
+    img: fogger,
     tags: ["compact"],
   },
 ];

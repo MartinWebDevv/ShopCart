@@ -51,7 +51,7 @@ export default function Cart({
       <h2 className="mb-4 text-lg font-medium">Cart</h2>
 
       {/* A bordered stack of items; divide-y draws lines between rows */}
-      <div className="flex justify-center divide-y divide-slate-200 dark:divide-slate-800 rounded-xl border border-slate-200 dark:border-slate-800">
+      <div className=" divide-y divide-slate-200 dark:divide-slate-800 rounded-xl border border-slate-200 dark:border-slate-800">
         {items.map((item) => (
           <div
             key={item.id} // unique key so React can track the row

@@ -5,15 +5,15 @@ import React, { useMemo, useState } from "react";
 import Header from "./components/Header";
 import Product from "./features/Product";
 import Cart from "./components/Cart";
+import ProductDetailModal from "./components/ProductDetailModal";
 
 export default function App() {
-  // cartItems holds every line in the cart.
-  // Each line will look like: { id, name, price (in cents), qty, img? }
-  // Name choice: "cartItems" reads clearly (array of cart line *items*).
+  
   const [cartItems, setCartItems] = useState([]);
+  const [isModelOpen, setIsModelOpen] = useState(false);
+  const  [selectedProduct, setSelectedProduct] = useState(null);
 
-  // count = total number of items in the cart (sum of all quantities).
-  // useMemo recomputes only when cartItems changes (cheap here, good habit).
+  
   const count = useMemo(
     () => cartItems.reduce((n, line) => n + line.qty, 0),
     [cartItems]
@@ -25,9 +25,7 @@ export default function App() {
     [cartItems]
   );
 
-  // addItem(product): either increase qty if the product is already in the cart,
-  // or push a new line with qty = 1.
-  // Parameter name "product" matches what Product/ProductCard naturally have.
+  //cart functions
   function addItem(product) {
     // setItems with a function gives us the latest prev state safely.
     setCartItems((prev) => {
@@ -63,17 +61,34 @@ export default function App() {
   function removeItem(id) {
     setCartItems((prev) => prev.filter((l) => l.id !== id));
   }
+  
+  //product detail modal functions
+  function openModel(product) {
+    setIsModelOpen(true);
+    setSelectedProduct(product);
+  }
+  
+  function closeModel() {
+    setIsModelOpen(false);
+    setSelectedProduct(null);
+  }
 
   return (
     <>
       <Header count={count} />
-      <Product onAdd={(p) => addItem(p)} />
+      <Product onAdd={(p) => addItem(p)} onOpenModel={(p) => openModel(p)} />
       <Cart
         items={cartItems}
         subtotal={subtotal}
         increment={increment}
         decrement={decrement}
         removeItem={removeItem}
+      />
+      <ProductDetailModal 
+        isOpen={isModelOpen}
+        onClose={closeModel}
+        product={selectedProduct}
+        onAdd={(p) => addItem(p)}
       />
     </>
   );

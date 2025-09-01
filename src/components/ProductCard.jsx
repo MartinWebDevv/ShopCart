@@ -7,7 +7,10 @@ export default function ProductCard(props) {
   return (
     <div className="rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800">
       {/* Image / placeholder */}
-      <div className="h-56 w-full bg-slate-600 flex items-center justify-center text-slate-200">
+      <div
+        onClick={props.onOpenModel}
+        className="h-56 w-full bg-slate-600 flex items-center justify-center text-slate-200"
+      >
         {props.img ? (
           <img
             src={props.img}
