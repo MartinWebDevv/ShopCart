@@ -1,25 +1,37 @@
 // - useState: lets this component hold and update state (our cart)
 // - useMemo: efficiently compute values (count, subtotal) from the cart
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 
 import Header from "./components/Header";
+import SearchBar from "./components/SearchBar";
 import Product from "./features/Product";
 import Cart from "./components/Cart";
 import ProductDetailModal from "./components/ProductDetailModal";
 
 export default function App() {
-  
   const [cartItems, setCartItems] = useState([]);
   const [isModelOpen, setIsModelOpen] = useState(false);
-  const  [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  
+  // Debounce search input
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearchQuery(searchInput);
+    }, 500); // .5 second delay
+    return () => clearTimeout(timer);
+  }, [searchInput]);
+
+  const handleSearch = (e) => {
+    setSearchInput(e.target.value);
+  };
+
   const count = useMemo(
     () => cartItems.reduce((n, line) => n + line.qty, 0),
     [cartItems]
   );
 
-  // subtotal = sum of price * qty for each line (still in cents to avoid float issues).
   const subtotal = useMemo(
     () => cartItems.reduce((sum, line) => sum + line.price * line.qty, 0),
     [cartItems]
@@ -27,18 +39,15 @@ export default function App() {
 
   //cart functions
   function addItem(product) {
-    // setItems with a function gives us the latest prev state safely.
     setCartItems((prev) => {
-      // Find if this product already exists in the cart by id.
       const idx = prev.findIndex((l) => l.id === product.id);
       if (idx !== -1) {
-        // Create a new array (immutability) so React sees the change.
         const next = [...prev];
-        // Copy the existing line, bump qty by 1.
+
         next[idx] = { ...next[idx], qty: next[idx].qty + 1 };
         return next;
       }
-      // If it's not there, add a new line: spread product fields, set qty to 1.
+
       return [...prev, { ...product, qty: 1 }];
     });
   }
@@ -61,13 +70,13 @@ export default function App() {
   function removeItem(id) {
     setCartItems((prev) => prev.filter((l) => l.id !== id));
   }
-  
+
   //product detail modal functions
   function openModel(product) {
     setIsModelOpen(true);
     setSelectedProduct(product);
   }
-  
+
   function closeModel() {
     setIsModelOpen(false);
     setSelectedProduct(null);
@@ -76,7 +85,12 @@ export default function App() {
   return (
     <>
       <Header count={count} />
-      <Product onAdd={(p) => addItem(p)} onOpenModel={(p) => openModel(p)} />
+      <SearchBar value={searchInput} onChange={handleSearch} />
+      <Product
+        onAdd={(p) => addItem(p)}
+        onOpenModel={(p) => openModel(p)}
+        searchQuery={searchQuery}
+      />
       <Cart
         items={cartItems}
         subtotal={subtotal}
@@ -84,7 +98,7 @@ export default function App() {
         decrement={decrement}
         removeItem={removeItem}
       />
-      <ProductDetailModal 
+      <ProductDetailModal
         isOpen={isModelOpen}
         onClose={closeModel}
         product={selectedProduct}

@@ -17,10 +17,16 @@ The project demonstrates core e-commerce features such as product listings, a sh
 ## Roadmap
 - [x] Header + navigation
 - [x] Product grid + reusable cards
-- [ ] Cart state management (add/remove/qty)
-- [ ] Cart drawer with line items
+- [x] Cart state management (add/remove/qty)
+- [x] Cart drawer with line items
 - [ ] Filters & sorting
+- [ ] Search functionality
+- [ ] Persistent cart (local storage)
 - [ ] Promo codes + discounts
+- [ ] Animations (e.g., cart drawer, modal transitions)
+- [ ] Accessibility improvements (keyboard navigation, ARIA roles)
+- [ ] User authentication (mock login/signup)
+- [ ] Analytics (track product views, cart additions)
 - [ ] Deployment on GitHub Pages
 
 ---
@@ -50,3 +56,4 @@ main.jsx
 
 npm install
 npm run dev
+```

@@ -7,7 +7,7 @@ export const products = [
   {
     id: "p-001",
     name: "Geek Bar X",
-    category: "disposable",
+    category: "Disposable",
     price: 2199, // cents
     inStock: true,
     img: geekbar,
@@ -16,7 +16,7 @@ export const products = [
   {
     id: "p-002",
     name: "Skweezed 100ml",
-    category: "juice",
+    category: "Juice",
     price: 1899,
     inStock: true,
     img: skweezed,
@@ -25,7 +25,7 @@ export const products = [
   {
     id: "p-003",
     name: "Aegis Legend 3 Kit",
-    category: "device",
+    category: "Device",
     price: 10000,
     inStock: true,
     img: aegisLegend3,
@@ -34,11 +34,20 @@ export const products = [
   {
     id: "p-004",
     name: "Fogger Switch Pro",
-    category: "disposable",
+    category: "Disposable",
     price: 2199,
     inStock: true,
     img: fogger,
     tags: ["compact"],
+  },
+  {
+    id: "p-005",
+    name: "Labubu",
+    category: "Doll",
+    price: 7000,
+    inStock: true,
+    img: "",
+    tags: ["doll", "cute"],
   },
 ];
 
