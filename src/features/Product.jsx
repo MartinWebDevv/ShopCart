@@ -17,14 +17,11 @@ export default function Product({ onAdd, onOpenModel, searchQuery }) {
     search: "",
   });
 
-  // Debouncing is now handled in App.jsx
-
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setSelectedFilters((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle clearing all filters
   const handleClearFilters = () => {
     setSelectedFilters({
       category: "",
@@ -34,16 +31,18 @@ export default function Product({ onAdd, onOpenModel, searchQuery }) {
     });
   };
 
-  // Filter products based on selected filters
+
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
-      // Search filter
-      if (searchQuery && 
-          !product.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+
+      if (
+        searchQuery &&
+        !product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      ) {
         return false;
       }
 
-      // Category filter
+
       if (
         selectedFilters.category &&
         product.category !== selectedFilters.category
@@ -51,7 +50,7 @@ export default function Product({ onAdd, onOpenModel, searchQuery }) {
         return false;
       }
 
-      // Price range filter
+
       const productPrice = product.price; // price is in cents
       if (
         selectedFilters.minPrice &&
@@ -68,7 +67,7 @@ export default function Product({ onAdd, onOpenModel, searchQuery }) {
 
       return true;
     });
-  }, [selectedFilters, searchQuery]); // Recalculate when filters or search changes
+  }, [selectedFilters, searchQuery]);
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-6">
@@ -76,7 +75,7 @@ export default function Product({ onAdd, onOpenModel, searchQuery }) {
         Products ({filteredProducts.length})
       </h2>
       <section className="grid grid-cols-[300px,1fr] gap-6">
-        <div className="pt-[0px]"> {/* This pushes the filter box down to align with cards */}
+        <div className="pt-[0px]">
           <Filters
             onChange={handleFilterChange}
             onClear={handleClearFilters}

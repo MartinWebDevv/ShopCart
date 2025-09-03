@@ -1,7 +1,4 @@
-// - useState: lets this component hold and update state (our cart)
-// - useMemo: efficiently compute values (count, subtotal) from the cart
 import React, { useMemo, useState, useEffect } from "react";
-
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import Product from "./features/Product";
@@ -15,7 +12,7 @@ export default function App() {
   const [searchInput, setSearchInput] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Debounce search input
+  //********************Debounce Search input*****************
   useEffect(() => {
     const timer = setTimeout(() => {
       setSearchQuery(searchInput);
@@ -27,6 +24,7 @@ export default function App() {
     setSearchInput(e.target.value);
   };
 
+  //****************************cart Variables*************************
   const count = useMemo(
     () => cartItems.reduce((n, line) => n + line.qty, 0),
     [cartItems]
@@ -36,8 +34,8 @@ export default function App() {
     () => cartItems.reduce((sum, line) => sum + line.price * line.qty, 0),
     [cartItems]
   );
+  //****************************cart functions*************************
 
-  //cart functions
   function addItem(product) {
     setCartItems((prev) => {
       const idx = prev.findIndex((l) => l.id === product.id);
@@ -62,7 +60,6 @@ export default function App() {
     setCartItems((prev) =>
       prev
         .map((l) => (l.id === id ? { ...l, qty: l.qty - 1 } : l))
-        // If qty hits 0, remove the line entirely.
         .filter((l) => l.qty > 0)
     );
   }
@@ -71,7 +68,7 @@ export default function App() {
     setCartItems((prev) => prev.filter((l) => l.id !== id));
   }
 
-  //product detail modal functions
+  //******************product detail modal functions*********************
   function openModel(product) {
     setIsModelOpen(true);
     setSelectedProduct(product);

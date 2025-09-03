@@ -7,11 +7,8 @@ export default function ProductDetailModal(props) {
   if (!isOpen) return null;
 
   return (
-    // Modal overlay - full screen with dark background
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      {/* Modal container - centered with max width and responsive design */}
       <div className="mx-4 max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white shadow-2xl dark:bg-slate-900">
-        {/* Header section with close button */}
         <div className="flex items-center justify-between border-b border-slate-200 p-6 dark:border-slate-700">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
             {product.name}
@@ -75,22 +72,21 @@ export default function ProductDetailModal(props) {
               </h1>
             </div>
 
-            {/* Price */}
             <div className="text-3xl font-bold text-green-600 dark:text-green-400">
               {formatPrice(product.price)}
             </div>
 
-            {/* Description */}
             <div>
               <h3 className="mb-2 text-lg font-semibold text-slate-900 dark:text-white">
                 Description
               </h3>
               <p className="text-slate-600 dark:text-slate-300">
-                {product.description ? product.description : "No description available."}
+                {product.description
+                  ? product.description
+                  : "No description available."}
               </p>
             </div>
 
-            {/* Product specifications */}
             <div>
               <h3 className="mb-3 text-lg font-semibold text-slate-900 dark:text-white">
                 Specifications
@@ -140,7 +136,6 @@ export default function ProductDetailModal(props) {
               </div>
             </div>
 
-            {/* Action buttons */}
             <div className="flex gap-4 pt-4">
               <button
                 onClick={() => (product.inStock ? onAdd(product) : null)}
