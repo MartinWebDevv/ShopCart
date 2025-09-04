@@ -19,8 +19,8 @@ The project demonstrates core e-commerce features such as product listings, a sh
 - [x] Product grid + reusable cards
 - [x] Cart state management (add/remove/qty)
 - [x] Cart drawer with line items
-- [ ] Filters & sorting
-- [ ] Search functionality
+- [x] Filters & sorting
+- [x] Search functionality
 - [ ] Persistent cart (local storage)
 - [ ] Promo codes + discounts
 - [ ] Animations (e.g., cart drawer, modal transitions)

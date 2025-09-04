@@ -8,6 +8,7 @@ import ProductDetailModal from "./components/ProductDetailModal";
 export default function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isModelOpen, setIsModelOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -82,11 +83,17 @@ export default function App() {
   return (
     <>
       <Header count={count} />
-      <SearchBar value={searchInput} onChange={handleSearch} />
+      <SearchBar
+        value={searchInput}
+        onChange={handleSearch}
+        showFilters={() => setIsFilterOpen(true)}
+      />
       <Product
         onAdd={(p) => addItem(p)}
         onOpenModel={(p) => openModel(p)}
         searchQuery={searchQuery}
+        isFilterOpen={isFilterOpen}
+        setIsFilterOpen={setIsFilterOpen}
       />
       <Cart
         items={cartItems}

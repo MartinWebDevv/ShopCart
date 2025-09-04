@@ -1,14 +1,41 @@
 import React from "react";
+import SortProducts from "./SortProducts";
 
 export default function Filters({
   onChange,
   onClear,
+  onClose,
   categories,
   resultsCount,
   selectedFilters,
+  selectedSort,
+  onSortChange,
 }) {
   return (
-    <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-lg shadow-md">
+    <div className="md:p-4 bg-slate-100 dark:bg-slate-800 rounded-lg shadow-md md:sticky md:top-4">
+      {/* Mobile Close Button */}
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 p-4 md:hidden">
+        <h2 className="text-md font-bold">Filters</h2>
+        <button
+          onClick={onClose}
+          className="rounded-lg p-2 hover:bg-slate-200 dark:hover:bg-slate-700"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
       {/* Results count */}
       <div className="mb-4 text-sm text-slate-600 dark:text-slate-400">
         {resultsCount} products found
@@ -67,6 +94,11 @@ export default function Filters({
             className="w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-700 dark:text-slate-300"
           />
         </div>
+      </div>
+      <div>
+        <SortProducts 
+        selectedSort={selectedSort} 
+        onSortChange={onSortChange} />
       </div>
 
       <button
