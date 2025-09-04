@@ -8,7 +8,7 @@ export default function SearchBar({ value, onChange, showFilters }) {
       <div className="mx-auto max-w-6xl px-3 sm:px-4 py-3 sm:py-4">
         <div className="flex items-center gap-2">
           {/* Desktop Search */}
-          <div className="hidden md:block flex-1">
+          <div className="hidden lg:block flex-1">
             <input
               type="text"
               id="search"
@@ -21,7 +21,7 @@ export default function SearchBar({ value, onChange, showFilters }) {
           </div>
 
           {/* Mobile Icons */}
-          <div className="flex md:hidden items-center gap-3">
+          <div className="flex lg:hidden items-center gap-3">
             {/* Search Icon/Input */}
             <div className="relative flex-1">
               <button

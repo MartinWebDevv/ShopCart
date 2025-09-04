@@ -12,7 +12,7 @@ export default function Filters({
   onSortChange,
 }) {
   return (
-    <div className="md:p-4 bg-slate-100 dark:bg-slate-800 rounded-lg shadow-md md:sticky md:top-4">
+    <div className="md:p-4 rounded-xl bg-white shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800 md:sticky md:top-4">
       {/* Mobile Close Button */}
       <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 p-4 md:hidden">
         <h2 className="text-md font-bold">Filters</h2>
@@ -37,8 +37,8 @@ export default function Filters({
         </button>
       </div>
       {/* Results count */}
-      <div className="mb-4 text-sm text-slate-600 dark:text-slate-400">
-        {resultsCount} products found
+      <div className="mb-4 inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+        {resultsCount} products
       </div>
 
       {/* Category Filter */}
@@ -96,9 +96,7 @@ export default function Filters({
         </div>
       </div>
       <div>
-        <SortProducts 
-        selectedSort={selectedSort} 
-        onSortChange={onSortChange} />
+        <SortProducts selectedSort={selectedSort} onSortChange={onSortChange} />
       </div>
 
       <button

@@ -10,10 +10,9 @@ export default function Product({
   isFilterOpen,
   setIsFilterOpen,
 }) {
-  // Memoize categories to prevent recalculation on every render
   const categories = useMemo(
     () => [...new Set(products.map((product) => product.category))],
-    [] // Empty dependency array since products is static
+    []
   );
 
   const [selectedFilters, setSelectedFilters] = useState({
@@ -42,6 +41,7 @@ export default function Product({
       maxPrice: "",
       search: "",
     });
+    setSelectedSort("default");
   };
 
   const filteredProducts = useMemo(() => {
@@ -119,16 +119,10 @@ export default function Product({
           />
         </div>
 
-        {/* Mobile Filter Drawer */}
+        {/* Mobile Filters: drop-down panel under the header/search (like the mobile search bar) */}
         {isFilterOpen && (
-          <div
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-            onClick={() => setIsFilterOpen(false)}
-          >
-            <div
-              className="fixed right-0 top-0 h-full w-80 bg-white dark:bg-slate-900 transform transition-transform duration-300 translate-x-0"
-              onClick={(e) => e.stopPropagation()}
-            >
+          <div className="lg:hidden fixed inset-x-0 top-[3.75rem] z-50 border-t border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg">
+            <div className="max-w-6xl mx-auto px-3 py-3">
               <Filters
                 onChange={handleFilterChange}
                 onClear={handleClearFilters}
@@ -136,6 +130,8 @@ export default function Product({
                 categories={categories}
                 resultsCount={filteredProducts.length}
                 selectedFilters={selectedFilters}
+                selectedSort={selectedSort}
+                onSortChange={handleSortChange}
               />
             </div>
           </div>
@@ -143,7 +139,7 @@ export default function Product({
 
         {/* Product Grid */}
         <div className="order-1 lg:order-2">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
             {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
