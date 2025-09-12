@@ -21,7 +21,7 @@ The project demonstrates core e-commerce features such as product listings, a sh
 - [x] Cart drawer with line items
 - [x] Filters & sorting
 - [x] Search functionality
-- [ ] Persistent cart (local storage)
+- [x] Persistent cart (local storage)
 - [ ] Promo codes + discounts
 - [ ] Animations (e.g., cart drawer, modal transitions)
 - [ ] Accessibility improvements (keyboard navigation, ARIA roles)

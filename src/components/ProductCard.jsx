@@ -41,8 +41,15 @@ export default function ProductCard(props) {
           }`}
         >
           <div className="absolute inset-0 rounded-t-lg c-veil backdrop-blur-sm" />
-          <span className="relative select-none text-lg font-normal tracking-wide c-muted">
-            Add to Cart
+          <span
+            style={{
+              WebkitTextStroke: "1px black", //gives an outline to text
+              fontFamily: "Impact, fantasy",
+              fontSize:"22px"
+            }}
+            className="relative select-none text-lg font-normal tracking-wide c-muted"
+          >
+            Added to Cart
           </span>
         </div>
       </div>
@@ -53,7 +60,9 @@ export default function ProductCard(props) {
           {props.category}
         </p>
         <p className="mb-1 text-base font-medium c-text">{props.name}</p>
-        <p className="mb-3 text-sm font-semibold c-text">{formatPrice(props.price)}</p>
+        <p className="mb-3 text-sm font-semibold c-text">
+          {formatPrice(props.price)}
+        </p>
 
         {Array.isArray(props.tags) && props.tags.length > 0 && (
           <div className="mb-3 flex flex-wrap gap-1">

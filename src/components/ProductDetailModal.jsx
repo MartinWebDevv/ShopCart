@@ -27,9 +27,18 @@ export default function ProductDetailModal(props) {
             className="rounded-full p-2 btn-ghost"
             aria-label="Close modal"
           >
-            <svg className="h-6 w-6 c-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"/>
+            <svg
+              className="h-6 w-6 c-text"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -41,7 +50,11 @@ export default function ProductDetailModal(props) {
             <div className="aspect-square overflow-hidden rounded-xl c-input">
               <div className="h-full w-full">
                 {product.img ? (
-                  <img src={product.img} alt={product.name} className="h-full w-full object-cover" />
+                  <img
+                    src={product.img}
+                    alt={product.name}
+                    className="h-full w-full object-cover"
+                  />
                 ) : (
                   <span className="c-muted">{product.name}</span>
                 )}
@@ -54,8 +67,15 @@ export default function ProductDetailModal(props) {
                 }`}
               >
                 <div className="absolute inset-0 rounded-xl c-veil backdrop-blur-sm" />
-                <span className="relative select-none text-lg font-normal tracking-wide c-muted">
-                  Add to Cart
+                <span
+                  style={{
+                    WebkitTextStroke: "1px black", //gives an outline to text
+                    fontFamily: "Impact, fantasy",
+                    fontSize:"30px"
+                  }}
+                  className="relative select-none text-lg font-normal tracking-wide c-muted"
+                >
+                  Added to Cart
                 </span>
               </div>
             </div>
@@ -63,8 +83,17 @@ export default function ProductDetailModal(props) {
             {/* Thumbnails */}
             <div className="flex gap-2">
               {[product.img, product.img, product.img].map((src, i) => (
-                <div key={i} className="aspect-square h-20 w-20 overflow-hidden rounded-lg c-input">
-                  {src ? <img src={src} alt={`${product.name} ${i + 1}`} className="h-full w-full object-cover" /> : null}
+                <div
+                  key={i}
+                  className="aspect-square h-20 w-20 overflow-hidden rounded-lg c-input"
+                >
+                  {src ? (
+                    <img
+                      src={src}
+                      alt={`${product.name} ${i + 1}`}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : null}
                 </div>
               ))}
             </div>
@@ -85,17 +114,25 @@ export default function ProductDetailModal(props) {
 
             <div>
               <h3 className="mb-2 text-lg font-semibold c-text">Description</h3>
-              <p className="c-muted">{product.description ?? "No description available."}</p>
+              <p className="c-muted">
+                {product.description ?? "No description available."}
+              </p>
             </div>
 
             <div>
-              <h3 className="mb-3 text-lg font-semibold c-text">Specifications</h3>
+              <h3 className="mb-3 text-lg font-semibold c-text">
+                Specifications
+              </h3>
               <div className="space-y-2">
                 {Array.isArray(product.specs) && product.specs.length > 0 ? (
                   product.specs.map((spec, idx) => (
                     <div
                       key={spec.name || idx}
-                      className={`flex justify-between py-2 ${idx !== product.specs.length - 1 ? "border-b c-border" : ""}`}
+                      className={`flex justify-between py-2 ${
+                        idx !== product.specs.length - 1
+                          ? "border-b c-border"
+                          : ""
+                      }`}
                     >
                       <span className="c-muted">{spec.name}</span>
                       <span className="font-medium c-text">{spec.value}</span>
@@ -113,7 +150,10 @@ export default function ProductDetailModal(props) {
               <div className="flex flex-wrap gap-2">
                 {Array.isArray(product.tags) &&
                   product.tags.map((tag, idx) => (
-                    <span key={tag || idx} className="rounded-full px-3 py-1 text-sm chip border c-border">
+                    <span
+                      key={tag || idx}
+                      className="rounded-full px-3 py-1 text-sm chip border c-border"
+                    >
                       {tag}
                     </span>
                   ))}
@@ -126,7 +166,13 @@ export default function ProductDetailModal(props) {
                 onClick={handleClick}
                 disabled={!product.inStock}
                 className={`flex-1 rounded-xl px-6 py-3 font-semibold transition-colors
-                  ${product.inStock ? (clicked ? "btn-flash" : "btn-primary") : "btn-disabled"}
+                  ${
+                    product.inStock
+                      ? clicked
+                        ? "btn-flash"
+                        : "btn-primary"
+                      : "btn-disabled"
+                  }
                 `}
               >
                 {product.inStock ? "Add to Cart" : "Out of Stock"}

@@ -5,7 +5,7 @@ import Product from "./features/Product";
 import Cart from "./components/Cart";
 import ProductDetailModal from "./components/ProductDetailModal";
 
-/***************************** Cart persistence*****************************/
+/*****************************Cart persistence*****************************/
 const CART_KEY = "sc_cart_v1";
 
 function safeParse(json, fallback) {
@@ -53,7 +53,7 @@ export default function App() {
   const handleSearch = (e) => setSearchInput(e.target.value);
   // *****************************************************************************
 
-  // **********************************Persist cart*******************************
+  // ******************************Cart persistence*******************************
   // Save to localStorage whenever cart items change
   useEffect(() => {
     saveCart(cartItems);
