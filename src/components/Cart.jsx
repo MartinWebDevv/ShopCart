@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 
+/** Format cents -> localized currency string */
 function formatUSD(cents) {
   return (cents / 100).toLocaleString(undefined, {
     style: "currency",
@@ -15,7 +16,17 @@ export default function Cart({
   increment,
   decrement,
   removeItem,
-  onClear,            // ⬅ new prop
+  onClear,
+
+  // ------- Promo props from App.jsx -------
+  couponValue,
+  onCouponChange,
+  onApplyCoupon,
+  onRemoveCoupon,
+  appliedCoupon,
+  couponMessage,
+  discountCents,
+  totalCents,
 }) {
   useEffect(() => {
     if (!isOpen) return;
@@ -58,12 +69,12 @@ export default function Cart({
           </button>
         </div>
 
-        {/* Body */}
+        {/* Body: line items */}
         <div className="flex-1 overflow-y-auto p-4">
           {isEmpty ? (
             <p className="text-sm c-muted">Your cart is empty.</p>
           ) : (
-            <div className="rounded-xl border c-border divide-y c-divide">
+            <div className="rounded-xl border c-border divide-y c-divide mb-4">
               {items.map((item) => (
                 <div
                   key={item.id}
@@ -71,11 +82,7 @@ export default function Cart({
                 >
                   <div className="h-16 w-16 overflow-hidden rounded c-input">
                     {item.img ? (
-                      <img
-                        src={item.img}
-                        alt={item.name}
-                        className="h-full w-full object-cover"
-                      />
+                      <img src={item.img} alt={item.name} className="h-full w-full object-cover" />
                     ) : null}
                   </div>
 
@@ -119,13 +126,82 @@ export default function Cart({
               ))}
             </div>
           )}
+
+          {/* Promo / coupon area (always visible; disable when empty) */}
+          <div className="rounded-lg border c-border p-3">
+            {!appliedCoupon ? (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  onApplyCoupon?.(couponValue);
+                }}
+                className="flex gap-2"
+              >
+                <input
+                  name="couponCode"
+                  value={couponValue}
+                  onChange={(e) => onCouponChange?.(e.target.value)}
+                  className="flex-1 rounded-lg border c-border c-input px-3 py-2 focus:outline-none focus:ring-2 c-ring"
+                  placeholder="Promo code"
+                  disabled={isEmpty}
+                />
+                <button
+                  className="rounded-lg px-3 py-2 btn"
+                  type="submit"
+                  disabled={isEmpty || !couponValue || !couponValue.trim()}
+                >
+                  Apply
+                </button>
+              </form>
+            ) : (
+              <div className="flex items-center justify-between">
+                <div className="text-sm c-muted">
+                  Code{" "}
+                  <span className="badge-accent rounded px-2 py-0.5 ml-1">
+                    {appliedCoupon}
+                  </span>{" "}
+                  applied
+                </div>
+                <button className="text-sm underline" onClick={() => onRemoveCoupon?.()}>
+                  Remove
+                </button>
+              </div>
+            )}
+
+            {couponMessage ? (
+              <p className="mt-2 text-xs c-muted">{couponMessage}</p>
+            ) : null}
+          </div>
         </div>
 
-        {/* Footer */}
+        {/* Footer: totals + actions */}
         <div className="border-t c-border p-4">
-          <div className="mb-3 flex items-center justify-between">
+          <div className="mb-2 flex items-center justify-between">
             <span className="text-sm c-muted">Subtotal</span>
-            <span className="text-base font-semibold c-text">{formatUSD(subtotal)}</span>
+            <span className="text-base font-semibold c-text">
+              {formatUSD(subtotal)}
+            </span>
+          </div>
+
+          {discountCents > 0 && (
+            <div className="mb-2 flex items-center justify-between">
+              <span className="text-sm c-muted">
+                Discount {appliedCoupon ? `(${appliedCoupon})` : ""}
+              </span>
+              <span
+                className="text-base font-semibold"
+                style={{ color: "var(--c-success)" }}
+              >
+                −{formatUSD(discountCents)}
+              </span>
+            </div>
+          )}
+
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-sm c-text">Total</span>
+            <span className="text-lg font-bold c-text">
+              {formatUSD(totalCents ?? subtotal)}
+            </span>
           </div>
 
           <div className="flex gap-2">
@@ -133,9 +209,7 @@ export default function Cart({
               className="w-1/2 rounded-xl px-4 py-2 btn disabled:opacity-60"
               disabled={isEmpty}
               onClick={() => {
-                if (window.confirm("Clear all items from your cart?")) {
-                  onClear?.();
-                }
+                if (window.confirm("Clear all items from your cart?")) onClear?.();
               }}
               aria-label="Clear cart"
             >
