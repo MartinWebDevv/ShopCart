@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   COLORISTIC THEME — single source of truth (edit these)
+   Palette: Charcoal surfaces + Electric Blue accent + Mint success
+   ========================================================= */
+:root {
+  --c-bg: #0f1216; /* app background */
+  --c-surface: #131821; /* header / panels */
+  --c-card: #171d27; /* cards / modals */
+  --c-input: #1b2230; /* inputs / image placeholders */
+  --c-border: #2a3444; /* borders / dividers */
+
+  --c-text: #e8edf3; /* primary text */
+  --c-muted: #a7b3c3; /* secondary text */
+
+  --c-accent: #60a5fa; /* electric blue (CTA, hovers) */
+  --c-success: #34d399; /* mint green (price, success) */
+  --c-danger: #ef4444; /* errors */
+
+  --c-overlay: rgba(6, 9, 14, 0.6); /* page overlay */
+  --c-veil: rgba(255, 255, 255, 0.06); /* image veil flash */
+  --c-flash: #7a879a; /* click flash on buttons */
+}
+
+/* Base body uses theme */
+html,
+body {
+  height: 100%;
+}
+body {
+  background-color: var(--c-bg);
+  color: var(--c-text);
+}
+
+/* =========================================================
+   Tiny utilities & components (color only)
+   ========================================================= */
+@layer utilities {
+  /* Surfaces */
+  .c-bg {
+    background-color: var(--c-bg);
+  }
+  .c-surface {
+    background-color: var(--c-surface);
+  }
+  .c-card {
+    background-color: var(--c-card);
+  }
+  .c-input {
+    background-color: var(--c-input);
+  }
+  .c-overlay {
+    background-color: var(--c-overlay);
+  }
+  .c-veil {
+    background-color: var(--c-veil);
+  }
+
+  /* Text */
+  .c-text {
+    color: var(--c-text);
+  }
+  .c-muted {
+    color: var(--c-muted);
+  }
+
+  /* Borders & rings */
+  .c-border {
+    border-color: var(--c-border);
+  }
+  .c-divide {
+    border-color: var(--c-border);
+  }
+  .c-ring {
+    --tw-ring-color: var(--c-border);
+  }
+
+  /* Frosted header surface (color only; Tailwind handles blur) */
+  .c-frosted {
+    background-color: color-mix(in srgb, var(--c-surface) 88%, transparent);
+  }
+
+  /* Badges / chips (color only) */
+  .badge {
+    color: var(--c-text);
+    background-color: transparent;
+    border-color: var(--c-border);
+  }
+  .badge-accent {
+    color: #0b1120;
+    background-color: var(--c-accent);
+  }
+
+  .chip {
+    color: var(--c-text);
+    background-color: var(--c-input);
+    border-color: var(--c-border);
+  }
+
+  /* Price / success text */
+  .c-price {
+    color: var(--c-success);
+  }
+}
+
+/* Buttons (color only; Tailwind handles spacing/rounded) */
+@layer components {
+  .btn {
+    color: var(--c-text);
+    background: transparent;
+    border: 1px solid var(--c-border);
+  }
+  .btn:hover {
+    background: color-mix(in srgb, var(--c-accent) 12%, var(--c-card));
+    border-color: var(--c-accent);
+  }
+
+  .btn-primary {
+    color: #fff;
+    background: var(--c-accent);
+    border: 1px solid var(--c-accent);
+  }
+  .btn-primary:hover {
+    filter: brightness(0.95);
+  }
+
+  .btn-ghost {
+    color: var(--c-text);
+    background: transparent;
+    border: 1px solid transparent;
+  }
+  .btn-ghost:hover {
+    background: color-mix(in srgb, var(--c-accent) 10%, var(--c-card));
+  }
+
+  .btn-disabled {
+    color: var(--c-muted);
+    background: var(--c-input);
+    border: 1px solid var(--c-border);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  .btn-flash {
+    color: #fff;
+    background: var(--c-flash);
+    border: 1px solid var(--c-flash);
+  }
+}
