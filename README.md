@@ -22,8 +22,8 @@ The project demonstrates core e-commerce features such as product listings, a sh
 - [x] Filters & sorting
 - [x] Search functionality
 - [x] Persistent cart (local storage)
-- [ ] Promo codes + discounts
-- [ ] Animations (e.g., cart drawer, modal transitions)
+- [x] Promo codes + discounts
+- [x]Animations (e.g., cart drawer, modal transitions)
 - [ ] Accessibility improvements (keyboard navigation, ARIA roles)
 - [ ] User authentication (mock login/signup)
 - [ ] Analytics (track product views, cart additions)
@@ -33,16 +33,45 @@ The project demonstrates core e-commerce features such as product listings, a sh
 
 ## Project Structure
 src/
-components/
-Header.jsx
-ProductCard.jsx
-Product.jsx
-context/
-CartContext.jsx (coming soon)
-data/
-products.js
-App.jsx
-main.jsx
+├── app/                     # Global state, contexts, and app-wide logic
+│   └── CartContext.jsx
+│
+├── assets/                  # Images, fonts, and other bundled media
+│
+├── data/                    # Static or mock data used throughout the app
+│   ├── products.js
+│   └── PromoCode.js
+│
+├── features/                # Feature-specific components and logic
+│   └── product/
+│       ├── ProductCard.jsx
+│       ├── ProductDetailModal.jsx
+│       ├── Filters.jsx
+│       └── SortProducts.jsx
+│
+├── lib/                     # Reusable helper and utility functions (no React)
+│   ├── cart.js
+│   └── promo.js
+│
+├── pages/                   # Top-level route pages
+│   ├── Home.jsx
+│   └── Products.jsx
+│
+├── styles/                  # Global styles and Tailwind CSS entry
+│   └── index.css
+│
+├── ui/                      # Reusable UI components shared across pages
+│   ├── Cart.jsx
+│   ├── Header.jsx
+│   └── SearchBar.jsx
+│
+├── App.jsx                  # Root application component (routes, providers)
+├── main.jsx                 # Entry point rendering the app
+│
+├── .prettierrc              # Code formatting rules (Prettier)
+├── eslint.config.js         # ESLint configuration
+└── tailwind.config.js       # Tailwind setup
+
 
 
 
