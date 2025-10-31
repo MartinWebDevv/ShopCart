@@ -1,8 +1,8 @@
 // src/features/Product.jsx
 import React, { useMemo, useState, useCallback } from "react";
 import { useCart } from "../app/CartContext.jsx";
-import ProductCard from "../components/ProductCard.jsx";
-import ProductDetailModal from "../components/ProductDetailModal.jsx";
+import ProductCard from "../features/product/ProductCard.jsx";
+import ProductDetailModal from "../features/product/ProductDetailModal.jsx";
 import { products as productsData } from "../data/products.js";
 
 /* =========================================

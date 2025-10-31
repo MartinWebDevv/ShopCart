@@ -1,8 +1,8 @@
 // src/components/Header.jsx
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { useCart } from "../app/CartContext.jsx";
-import SearchBar from "./SearchBar.jsx";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { useCart } from '../app/CartContext.jsx';
+import SearchBar from './SearchBar.jsx';
 
 /* =========================================
    SECTION: Header / Top Nav (with global search)
@@ -23,13 +23,10 @@ export default function Header({ cartCount = 0, onOpenCart }) {
 
         {/* Primary nav */}
         <div className="order-3 ml-0 flex w-full items-center gap-4 text-sm md:order-2 md:ml-4 md:w-auto">
-          <NavLink to="/" className={({ isActive }) => (isActive ? "underline" : "")}>
+          <NavLink to="/" className={({ isActive }) => (isActive ? 'underline' : '')}>
             Home
           </NavLink>
-          <NavLink
-            to="/products"
-            className={({ isActive }) => (isActive ? "underline" : "")}
-          >
+          <NavLink to="/products" className={({ isActive }) => (isActive ? 'underline' : '')}>
             Products
           </NavLink>
         </div>
@@ -46,7 +43,7 @@ export default function Header({ cartCount = 0, onOpenCart }) {
             className="rounded-lg border px-3 py-1.5 text-sm hover:bg-slate-50"
             aria-label="Open cart"
           >
-            Cart {cartCount > 0 ? `(${cartCount})` : ""}
+            Cart {cartCount > 0 ? `(${cartCount})` : ''}
           </button>
         </div>
       </nav>

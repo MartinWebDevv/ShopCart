@@ -1,23 +1,20 @@
 // src/App.jsx
-import React, { lazy, Suspense } from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
+import React, { lazy, Suspense } from 'react';
+import { Routes, Route, NavLink } from 'react-router-dom';
 
 /* =========================================
    SECTION: Context + UI Shell
    ========================================= */
-import { CartProvider, useCart } from "./app/CartContext.jsx";
-import Header from "./components/Header.jsx";
-import Cart from "./components/Cart.jsx";
+import { CartProvider, useCart } from './app/CartContext.jsx';
+import Header from './ui/Header.jsx';
+import Cart from './ui/Cart.jsx';
 
 /* =========================================
    SECTION: Lazy Routes
-   - Product page is code-split to reduce initial bundle size.
    ========================================= */
-const Product = lazy(() => import("./features/Product.jsx"));
+const Home = lazy(() => import('./pages/Home.jsx'));
+const Product = lazy(() => import('./pages/Product.jsx'));
 
-/* =========================================
-   SECTION: Tiny Loader (fallback while chunks load)
-   ========================================= */
 function Loader() {
   return <div className="p-6 text-sm text-slate-600">Loading…</div>;
 }
@@ -52,12 +49,9 @@ function AppShell() {
       <main className="mx-auto w-full max-w-6xl p-4">
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route index element={<Product />} />
+            <Route index element={<Home />} />
             <Route path="/products" element={<Product />} />
-            <Route
-              path="*"
-              element={<p className="text-red-600">404 — Page not found.</p>}
-            />
+            <Route path="*" element={<p className="text-red-600">404 — Page not found.</p>} />
           </Routes>
         </Suspense>
       </main>
